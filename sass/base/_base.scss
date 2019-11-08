@@ -1,0 +1,36 @@
+/* basic reset al posto di normalize.css */
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    /* inherit from html */
+    box-sizing: inherit;
+}
+
+html {
+    /* root font size for rem references importante per il design responsive
+    62.5%(10px) perchè la font-size dei browser è 16 quindi 62.5=10px
+    10px è comodo per le conversioni */
+    font-size: 62.5%; //1rem = 10px;
+
+    // per phone si applica la regola tab-port
+
+    @include respond(tab-land) {
+        font-size: 56.25%; //1rem = 9px 
+    }
+
+    @include respond(tab-port) {
+        font-size: 50%; //1rem = 8px 16:100=8:x -> 100*8/16=50
+    }
+
+    @include respond(big-desktop) {
+        font-size: 75%; //1rem = 12px
+    }
+}
+
+body {
+    /* la width height degli elementi è comprensiva di padding e border */
+    box-sizing: border-box;
+}

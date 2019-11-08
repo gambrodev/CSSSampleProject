@@ -1,0 +1,163 @@
+.navigation {
+
+  //chackbox nascosta che serve per il checkbox hack, la label sarà il pulsante bianco
+  &__checkbox {
+    display: none;
+  }
+
+  // questo è il background verde che è sempre presente nascosto dietro il bottone del menù
+  // quando clicco sul bottone il background si espande
+  &__background {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    // rimane sempre fermo sulla pagina
+    position: fixed;
+    top: 6.5rem;
+    right: 6.5rem;
+    // radial gradient va dal centro verso l'esterno
+    background-image: radial-gradient($color-primary-light, $color-primary-dark);
+    z-index: 1000;
+    transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  // il button bianco posizionato esattamente sul background verde
+  &__button {
+    background-color: $color-white;
+    height: 7rem;
+    width: 7rem;
+    position: fixed;
+    // il bottone è 1rem(10px) più grande del navigation__backgroeund
+    // quindi lo posiziono 1/2 rem in meno da top e right così da coprirlo interamente
+    top: 6rem;
+    right: 6rem;
+    border-radius: 50%;
+    z-index: 2000;
+    box-shadow: 0 1rem 3rem rgba($color-black, 0.3);
+    text-align: center;
+    cursor: pointer;
+  }
+
+  &__nav {
+    // occupa 100% in altezza e larghezza (quando è fatto apparire dal menu)
+    // position fixed e parte dallìangolo in alto a dx (top e right 0)
+    height: 100vh;
+    // per farlo scomparire setto width a 0
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1500;
+    transition: width 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  &__list {
+    position: absolute;
+    @include center-element;
+    list-style: none;
+    text-align: center;
+    width: 100%;
+  }
+
+  &__item {
+    margin: 1rem;
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      display: inline-block;
+      padding: 1rem 2rem;
+      font-size: 3rem;
+      font-weight: 300;
+      color: $color-white;
+      text-decoration: none;
+      text-transform: uppercase;
+      // avremo uno sfondo metà bianco e metà trasparente tagliato di sbieco grazie
+      // al linear gradient 120deg
+      // a 0% e 50% è trasparente da 50% in poi sarà bianco
+      // il trucco sarà ingrandire la background size di modo che normalmente
+      // sarà visibile solo la parte trasparente mentre appena si hovera il
+      // background si sposterà sulla parte bianca tramite background position 100%
+      background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%);
+      background-size: 225%;
+      transition: all 0.4s;
+
+      span {
+        margin-right: 1rem;
+      }
+    }
+
+    &:hover,
+    &:active {
+      background-position: 100%;
+      color: $color-primary;
+      transform: translateX(1rem);
+    }
+  }
+
+  &__checkbox:checked ~ &__background {
+    transform: scale(80);
+  }
+
+  &__checkbox:checked ~ &__nav {
+    width: 100%;
+  }
+
+  // sono le 3 sbarrette che vanno a formare il menù, si trasformano in X quando il la checkbox è checked
+  &__icon {
+    position: relative;
+    margin-top: 3.5rem;
+
+    &,
+    &::before,
+    &::after {
+      width: 3rem;
+      height: 2px;
+      background-color: $color-gray-dark-2;
+      display: inline-block;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all 0.2s;
+    }
+
+    // distanzio le linee
+    &::before {
+      top: -0.8rem;
+    }
+
+    &::after {
+      top: 0.8rem;
+    }
+  }
+
+  // quando hovero le linee di before and after si allargano
+  &__button:hover &__icon::before {
+    top: -1rem;
+  }
+
+  &__button:hover &__icon::after {
+    top: 1rem;
+  }
+
+  // quando la checkbox è checked la linea centrale scompare...
+  &__checkbox:checked + &__button &__icon {
+    background-color: transparent;
+  }
+
+  // e le linee before e after si incrociano
+  &__checkbox:checked + &__button &__icon::before {
+    top: 0;
+    transform: rotate(135deg);
+  }
+
+  &__checkbox:checked + &__button &__icon::after {
+    top: 0;
+    transform: rotate(-135deg);
+  }
+}

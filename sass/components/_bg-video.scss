@@ -1,0 +1,21 @@
+.bg-video {
+    // il parent deve essere positon:relative
+    // lo setto in _home.scss
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: .15;
+    // per clippare il video che altrimenti sarebbe più largo
+    overflow: hidden;
+
+    &__content {
+        height: 100%;
+        width: 100%;
+        // proprietà simile a background-size: cover che si usa per le immagini
+        // permette di far occupare al video lo stesso spazio del container
+        object-fit: cover;
+    }
+}

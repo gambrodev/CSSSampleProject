@@ -1,0 +1,62 @@
+/* definisco l'animazione per .heading-primary-main in typography.scss
+per le browser performance è meglio animare solo 2 property:
+opacity e transform */
+
+@keyframes moveInLeft {
+    /* inizio animazione */
+    0% {
+        /* invisibile all'inizio */
+        opacity: 0;
+        /* parte a 100px sulla sinistra */
+        transform: translateX(-10rem);
+    }
+    /* 80% nel tempo di animazione */
+    80% {
+        transform: translateX(1rem);
+    }
+    /* fine animazione */
+    100% {
+        /* visibile alla fine */
+        opacity: 1;
+        /* arriva alla posizione centrata */
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInRight {
+    /* inizio animazione */
+    0% {
+        /* invisibile all'inizio */
+        opacity: 0;
+        /* parte a 100px sulla destra */
+        transform: translateX(10rem);
+    }
+    /* 80% nel tempo di animazione */
+    80% {
+        transform: translateX(-1rem);
+    }
+    /* fine animazione */
+    100% {
+        /* visibile alla fine */
+        opacity: 1;
+        /* arriva alla posizione centrata */
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInBottom {
+    /* inizio animazione */
+    0% {
+        /* invisibile all'inizio */
+        opacity: 0;
+        /* parte a 100px bottom */
+        transform: translateY(10rem);
+    }
+    /* fine animazione */
+    100% {
+        /* visibile alla fine */
+        opacity: 1;
+        /* arriva alla posizione centrata */
+        transform: translate(0);
+    }
+}

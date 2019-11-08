@@ -1,0 +1,130 @@
+.btn-test {
+    &,
+    &:link,
+    &:visited {
+        display: inline-block;
+        text-decoration: none;
+        text-transform: uppercase;
+        padding: .8rem 1.5rem;
+        border-radius: .5rem;
+        color: white;
+        background-image: linear-gradient(120deg, black 0%, black 50%, white 50%);
+        background-size: 225%;
+        transition: all .4s;
+        z-index: 999999;
+    }
+
+    &:hover {
+        background-position: 100%;
+        color: black;
+    }
+}
+
+.btn {
+    &,
+    &:link,
+    &:visited {
+        display: inline-block;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        border-radius: 10rem;
+        transition: all .2s;
+        /* per poter mettere ::after ad absolute */
+        position: relative;
+
+        //Change for the <button> element
+        border: none;
+        cursor: pointer;
+    }
+
+    &:hover {
+        transform: translateY(-.3rem);
+        box-shadow: 0 1rem 2rem rgba($color-black, .2);
+
+        /* traghetta after solo quando btn è in hover */
+        &::after {
+            /* ingrandisco e ... */
+            transform: scaleX(1.5) scaleY(1.6);
+            /* ... faccio scomparire per effetto onda */
+            opacity: 0;
+        }
+    }
+
+    &:active,
+    &:focus {
+        transform: translateY(-.1rem);
+        box-shadow: 0 .5rem 1rem rgba($color-black, .2);
+    }
+
+    &--white {
+        background-color: $color-white;
+        color: $color-gray;
+
+        &::after {
+            background-color: $color-white;
+        }
+    }
+
+    &--green {
+        background-color: $color-primary;
+        color: $color-white;
+
+        &::after {
+            background-color: $color-primary ;
+        }
+    }
+
+
+    &::after {
+        /* content sempre necessario negli pseudo elements*/
+        content: "";
+        display: inline-block;
+        /* height e width si riferisce a btn che è il parent */
+        height: 100%;
+        width: 100%;
+        border-radius: 10rem;
+        /* per poterlo posizionare dietro al bottone (btn diventerà position: relative) */
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: all .4s;
+    }
+
+    &--animated {
+        animation-name: moveInBottom;
+        animation-duration: .5s;
+        animation-timing-function: ease-out;
+        animation-delay: .75 s;
+        /* applica opacity: 0 definita nell'animazione anche al di fuori dell'animazione (prima)*/
+        animation-fill-mode: backwards;
+    }
+}
+
+.btn-text {
+    &:link,
+    &:visited {
+        font-size: $default-font-size;
+        color: $color-primary;
+        display: inline-block;
+        text-decoration: none;
+        border-bottom: 1px solid $color-primary;
+        padding: 3px;
+        transition: all .2s;
+    }
+
+    &:hover {
+        background-color: $color-primary;
+        color: $color-white;
+        // sposto leggermente in su e metto ombra...
+        box-shadow: 0 1rem 2rem rgba($color-black, .15);
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        // ... riduco ombra e sposto a posizione originale
+        box-shadow: 0 1rem 1rem rgba($color-black, .15);
+        transform: translateY(0);
+    }
+}
