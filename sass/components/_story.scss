@@ -13,20 +13,46 @@
     // seleziona tutti i direct child del parent
     & > * {
         transform: skewX(12deg);
+
+        @include respond(phone) {
+            transform: skewX(0);
+        }
+    }
+
+    @include respond(tab-port) {
+        width: 100%;
+        padding: 4rem;
+        padding-left: 7rem;
+    }
+
+    @include respond(phone) {
+        transform: skewX(0);
     }
 
     &__shape {
         width: 15rem;
         height: 15rem;
         float: left;
-        // forma una shape esterna. l'elemento deve essere float ed avere height e width definite
-        -webkit-shape-outside: circle(50% at 50% 50%);
-        shape-outside: circle(50% at 50% 50%);
-        // creo la forma interna uguale a quella esterna
-        -webkit-clip-path: circle(50% at 50% 50%);
-        clip-path: circle(50% at 50% 50%);
+        border-radius: 50%;
         transform: translateX(-3rem) skewX(12deg);
         position: relative;
+        overflow: hidden;
+
+            /* se clip-path è supportato ... */
+        @supports (-webkit-clip-path: polygon(0 0)) or (clip-path: polygon(0 0)) {
+            // forma una shape esterna. l'elemento deve essere float ed avere height e width definite
+            -webkit-shape-outside: circle(50% at 50% 50%);
+            shape-outside: circle(50% at 50% 50%);
+            // creo la forma interna uguale a quella esterna
+            -webkit-clip-path: circle(50% at 50% 50%);
+            clip-path: circle(50% at 50% 50%);
+            border-radius: none;
+
+        }
+
+        @include respond(phone) {
+            transform: translateX(-3rem) skewX(0);
+        }
     }
 
     .story__img {
@@ -37,6 +63,10 @@
 
     &__text {
         transform: skewX(12deg);
+        
+        @include respond(phone) {
+            transform: skewX(0);
+        }
     }
 
     &__caption {

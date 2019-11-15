@@ -33,4 +33,17 @@ html {
 body {
     /* la width height degli elementi è comprensiva di padding e border */
     box-sizing: border-box;
+    /* bordo bianco intorno a tutta la web page */
+    padding: 3rem;
+
+    // rimuovo bordo bianco per dimensioni ridotte
+    @include respond(tab-port) {
+        padding: 0;
+    }
+}
+
+// style per il testo selezionato
+::selection {
+    background-color: $color-primary;
+    color: $color-white;
 }

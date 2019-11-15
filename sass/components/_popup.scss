@@ -9,7 +9,15 @@
   // opacity per poter animare
   opacity: 0;
   visibility: hidden;
+  -webkit-transition: all 0.4s;
   transition: all 0.4s;
+
+  // se il browser supporta questa funzionalità 
+  @supports(-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba($color-black, 0.3);
+  }
 
   &__content {
     display: table;
@@ -25,10 +33,12 @@
     // devo ripetere la translate già presente in @include ceneter-element
     // perchè se no sarebbe sovrascritta. solo un elemento transform è preso in considerazione
     // l'ultimo dichiarato
-    transform: translate(-50%, -50%) scale(.5);
+    -webkit-transform: translate(-50%, -50%) scale(0.5);
+            transform: translate(-50%, -50%) scale(0.5);
     // l'ultimo .2 è il transition-delay. permette al popup
     // di apparire .2s dopo lo sfondo nero
-    transition: all .4s .2s;
+    -webkit-transition: all 0.4s 0.2s;
+    transition: all 0.4s 0.2s;
   }
 
   &__left {
@@ -70,8 +80,9 @@
   }
 
   &:target &__content {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    -webkit-transform: translate(-50%, -50%) scale(1);
+            transform: translate(-50%, -50%) scale(1);
   }
 
   &__close {
@@ -85,7 +96,7 @@
     }
 
     &:hover {
-        color: $color-primary;
+      color: $color-primary;
     }
   }
 }

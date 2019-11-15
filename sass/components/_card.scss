@@ -1,5 +1,6 @@
 .card {
-    perspective: 150rem;
+    -webkit-perspective: 150rem;
+            perspective: 150rem;
     -moz-perspective: 150rem;
     position: relative;
     // specifico stessa height di .card__side
@@ -11,6 +12,7 @@
 
     &__side {
         height: 52rem;
+        -webkit-transition: all .8s ease;
         transition: all .8s ease;
         position: absolute;
         // width al 100% perchè con abs positioning
@@ -18,13 +20,15 @@
         width: 100%;
         // per nascondere la parte posteriore di un elemento
         // ci serve per nascondere la faccia della carta rotata
-        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
         border-radius: 3px;
         // per nascondere limmagine che esce dal parent
         // clip-path su picture rompe questa cosa
         // e i margini vanno settati sulla picture esplicitamente
         overflow: hidden;
-        box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+        -webkit-box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+                box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
 
         &--front {
             background-color: $color-white;
@@ -32,28 +36,34 @@
         }
 
         &--back {
-            transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+                    transform: rotateY(180deg);
 
             &-1 {
+                background-image: -webkit-gradient(linear, left top, right bottom, from($color-secondary-light), to($color-secondary-dark));
                 background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
             }
 
             &-2 {
+                background-image: -webkit-gradient(linear, left top, right bottom, from($color-primary-light), to($color-primary-dark));
                 background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
             }
 
             &-3 {
+                background-image: -webkit-gradient(linear, left top, right bottom, from($color-tertiary-light), to($color-tertiary-dark));
                 background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark);
             }
         }
     }
 
     &:hover &__side--front {
-        transform: rotateY(-180deg);
+        -webkit-transform: rotateY(-180deg);
+                transform: rotateY(-180deg);
     }
 
     &:hover &__side--back {
-        transform: rotateY(0deg);
+        -webkit-transform: rotateY(0deg);
+                transform: rotateY(0deg);
         z-index: 999;
     }
 
@@ -70,14 +80,17 @@
         border-top-right-radius: 3px;
 
         &--1 {
+            background-image: -webkit-gradient(linear, left top, right bottom, from($color-secondary-light), to($color-secondary-dark)), url(../img/nat-5.jpg);
             background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark), url(../img/nat-5.jpg);
         }
 
         &--2 {
+            background-image: -webkit-gradient(linear, left top, right bottom, from($color-primary-light), to($color-primary-dark)), url(../img/nat-6.jpg);
             background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark), url(../img/nat-6.jpg);
         }
 
         &--3 {
+            background-image: -webkit-gradient(linear, left top, right bottom, from($color-tertiary-light), to($color-tertiary-dark)), url(../img/nat-7.jpg);
             background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark), url(../img/nat-7.jpg);
         }
     }
@@ -102,14 +115,17 @@
         -webkit-box-decoration-break: clone;
         box-decoration-break: clone;
         &-1 {
+            background-image: -webkit-gradient(linear, left top, right bottom, from(rgba($color-secondary-light, .85)), to(rgba($color-secondary-dark, .85)));
             background-image: linear-gradient(to right bottom, rgba($color-secondary-light, .85), rgba($color-secondary-dark, .85));
         }
 
         &-2 {
+            background-image: -webkit-gradient(linear, left top, right bottom, from(rgba($color-primary-light, .85)), to(rgba($color-primary-dark, .85)));
             background-image: linear-gradient(to right bottom, rgba($color-primary-light, .85), rgba($color-primary-dark, .85));
         }
 
         &-3 {
+            background-image: -webkit-gradient(linear, left top, right bottom, from(rgba($color-tertiary-light, .85)), to(rgba($color-tertiary-dark, .85)));
             background-image: linear-gradient(to right bottom, rgba($color-tertiary-light, .85), rgba($color-tertiary-dark, .85));
         }
     }
@@ -141,7 +157,8 @@
         // per centralo completamente
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
         text-align: center;
         width: 90%;
     }
@@ -160,5 +177,67 @@
     &__price-value {
         font-size: 6rem;
         font-weight: 100;
+    }
+
+    // Media query for touch screen devices (hover: none)
+    @media only screen and (max-width: 56.25em),
+    only screen and (hover: none) {
+
+        height: auto;
+        border-radius: 3px;
+        background-color: $color-white;
+        -webkit-box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+                box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+
+        &__details {
+            padding: 1 3rem;
+        }
+
+        &__side {
+            height: auto;
+            -webkit-transition: all .8s ease;
+            transition: all .8s ease;
+            position: relative;
+            -webkit-box-shadow: none;
+                    box-shadow: none;
+            
+    
+            &--front {
+                background-color: $color-white;
+                z-index: 998;
+            }
+    
+            &--back {
+                -webkit-transform: rotateY(0);
+                        transform: rotateY(0);
+                -webkit-clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+                        clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+            }
+        }
+    
+        &:hover &__side--front {
+            -webkit-transform: rotateY(0);
+                    transform: rotateY(0);
+        }
+    
+        &__cta {
+            position: relative;
+            top: 0;
+            left: 0;
+            -webkit-transform: translate(0);
+                    transform: translate(0);
+            text-align: center;
+            width: 100%;
+            padding: 4rem;
+            padding: 7rem 4rem 4rem 4rem;
+        }
+    
+        &__price-box {
+            margin-bottom: 3rem;
+        }
+    
+        &__price-value {
+            font-size: 6rem;
+        }
     }
 }

@@ -4,6 +4,10 @@
   // setto margin top più alto per eliminare
   // spazio biaco dovuto a img croppata nell'header
   margin-top: -25vh;
+  
+  @include respond(tab-port) {
+    margin-top: -20vh;
+  }
 }
 
 .section-features {
@@ -21,6 +25,11 @@
   // setto margin top più alto per eliminare
   // spazio biaco dovuto allo skew della sezione
   margin-top: -10rem;
+
+  @include respond(tab-port) {
+    padding: 10rem 0;
+  }
+
 }
 
 .section-tours {
@@ -29,12 +38,22 @@
     // setto margin top più alto per eliminare
     // spazio biaco dovuto a img croppata nell'header
     margin-top: -10rem;
+
+    @include respond(tab-port) {
+      padding: 20rem 0 10rem 0;
+    }
+
 }
 
 .section-stories {
   // relative perchè posiziono il video come absolute
   position: relative;
   padding: 15rem 0;
+
+  @include respond(tab-port) {
+    padding: 10rem 0;
+  }
+
 }
 
 .section-book {
@@ -52,13 +71,41 @@
      transparent 50%), 
      //seconda immagine
     url(../../img/nat-10.jpg);
-  background-size: 100%; // uguale a cover
+
+  // simile a background-size: cover;
+  //fa si che limmagine occupi il 100% della width
+  background-size: 100%; 
   border-radius: 3px;
   box-shadow: 0 1.5rem 4rem rgba($color-black, .2 );
-  height: 50rem;
+
+  @include respond(tab-land) {
+    background-image: linear-gradient(105deg, 
+        rgba($color-white, .9) 0%,
+        rgba($color-white, .9) 65%,
+        transparent 65%), 
+    //seconda immagine
+    url(../../img/nat-10.jpg);
+      background-size: cover;
+  }
+
+  @include respond(tab-port) {
+    background-image: linear-gradient(to right, 
+    rgba($color-white, .9) 0%,
+    rgba($color-white, .9) 100%), 
+    //seconda immagine
+    url(../../img/nat-10.jpg);
+  }
 
   &__form {
     width: 50%;
-    padding: 6rem; 
+    padding: 6rem;
+    
+    @include respond(tab-land) {
+      width: 70%
+    }
+
+    @include respond(tab-port) {
+      width: 100%
+    }
   }
 }

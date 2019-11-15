@@ -1,5 +1,5 @@
 .row {
-    /* max-width permette di adattare le dimensioni
+    /* max-width permette di occupare il 100% della width
     in caso il viewport sia più piccolo della max-width*/
     max-width: $grid-width;
     /* per centrare elementi block */
@@ -7,6 +7,14 @@
     // seleziona tutto tranne il last-child!
     &:not(:last-child) {
         margin-bottom: $gutter-vertical;
+        @include respond(tab-port) {
+            margin-bottom: $gutter-vertical-small;
+        }
+    }
+
+    @include respond(tab-port) {
+        max-width: 50rem;
+        padding: 0 3rem;
     }
 
     @include clearfix;
@@ -17,6 +25,17 @@
 
         &:not(:last-child) {
             margin-right: $gutter-horizontal;
+            
+            // FOR MOBILE DEVICES ALL COLUMS BECAME ROWS
+            @include respond(tab-port) {
+                margin-right: 0;
+                margin-bottom: $gutter-vertical-small;
+            }
+        }
+
+        // FOR MOBILE DEVICES ALL COLUMS BECAME ROWS
+        @include respond(tab-port) {
+            width: 100% !important;
         }
     }
 
